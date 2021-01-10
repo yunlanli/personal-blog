@@ -16,6 +16,8 @@ const Card = styled.div`
 `
 const Thumbnail = styled.img`
     height: 35%;
+    width: 100%;
+    object-fit: cover;
 `
 const Content = styled.div`
     padding: 0 2em;
