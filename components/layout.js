@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import styled from 'styled-components'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
@@ -6,9 +7,15 @@ import Link from 'next/link'
 const name = 'Yunlan Li'
 export const siteTitle = 'Next.js Sample Website'
 
+const Container = styled.div`
+    max-width: ${ props => props.maxWidth};
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+`;
+
 export default function Layout({ children, home }) {
     return (
-        <div className={styles.container}>
+        <Container maxWidth={ home ? '36rem' : '72rem' }>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
                 <meta
@@ -61,6 +68,6 @@ export default function Layout({ children, home }) {
                     </Link>
                 </div>
             )}
-        </div>
+        </Container>
     )
 }
