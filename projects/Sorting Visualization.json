@@ -1,0 +1,18 @@
+{
+    "name": "Sorting Visualization",
+    "time": {
+        "start": "2020-05",
+        "end": "2020-08"
+    },
+    "description": "An interactive single-page website, deployed on a DigitalOcean droplet, that visualizes various general-purpose sorting algorithms with pause, view prev/next frame, customized animation speed and array size features.",
+    "thumbnail_url": "/images/projects/sorting-visualization.PNG",
+    "tech_stack": [
+        "JavaScript",
+        "React.js",
+        "Node.js",
+        "Nginx",
+        "Linux"
+    ],
+    "github": "https://github.com/yunlanli/Algorithm-Visualization",
+    "website": "http://204.48.20.143/sorting"
+}
