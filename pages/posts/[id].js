@@ -3,6 +3,12 @@ import Head from 'next/head'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
+import unified from 'unified'
+import markdown from 'remark-parse'
+import { Code, Pre } from '../../components/code_block'
+import remark2rehype from 'remark-rehype'
+import rehypePrism from '../../lib/rehypePrism'
+import rehype2react from 'rehype-react'
 
 export async function getStaticPaths() {
     const paths = getAllPostIds();
@@ -32,7 +38,21 @@ export default function Post({ postData }) {
                 <div className={utilStyles.lightText}>
                     <Date dateString={postData.date} />
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+                {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} /> */}
+                {
+                    unified()
+                        .use(markdown)
+                        .use(remark2rehype)
+                        .use(rehypePrism)
+                        .use(rehype2react, {
+                            createElement: React.createElement,
+                            components: {
+                                pre: Pre,
+                                code: Code
+                            }
+                        })
+                        .processSync(postData.content).result
+                }
             </article>
         </Layout>
     )
