@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 const TAG2COLOR = {
     'React.js': '#61DBFB',
     'Java': '#E95420',
@@ -10,6 +11,16 @@ const TAG2COLOR = {
     'MySQL': '#00758f'
 }
 
+export const Tag = ({ name }) => <TagContainer tagID={name}>{name}</TagContainer>;
+
+export function TagList({ list }) {
+        return (
+            <List>
+                { list.map((tag) => <Tag name={tag} key={tag}/>) }
+            </List>
+        )
+}
+    
 const TagContainer = styled.div`
     font-size: .5rem;
     line-height: 1.7em;
@@ -35,14 +46,3 @@ const List = styled.ul`
         margin-right: 1em;
     }
 `
-
-export const Tag = ({ name }) => <TagContainer tagID={name}>{name}</TagContainer>;
-
-export function TagList({ list }) {
-        return (
-            <List>
-                { list.map((tag) => <Tag name={tag} key={tag}/>) }
-            </List>
-        )
-}
-    

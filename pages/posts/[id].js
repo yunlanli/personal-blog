@@ -1,14 +1,14 @@
-import utilStyles from '../../styles/utils.module.css'
 import Head from 'next/head'
+import rehype2react from 'rehype-react'
+import markdown from 'remark-parse'
+import remark2rehype from 'remark-rehype'
+import unified from 'unified'
+import { Code, Content, Pre } from '../../components/common'
+import Date from '../../components/date'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
-import Date from '../../components/date'
-import unified from 'unified'
-import markdown from 'remark-parse'
-import { Code, Pre } from '../../components/code_block'
-import remark2rehype from 'remark-rehype'
 import rehypePrism from '../../lib/rehypePrism'
-import rehype2react from 'rehype-react'
+
 
 export async function getStaticPaths() {
     const paths = getAllPostIds();
@@ -33,27 +33,29 @@ export default function Post({ postData }) {
             <Head>
                 <title>{postData.title}</title>
             </Head>
-            <article>
-                <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-                <div className={utilStyles.lightText}>
-                    <Date dateString={postData.date} />
-                </div>
-                {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} /> */}
-                {
-                    unified()
-                        .use(markdown)
-                        .use(remark2rehype)
-                        .use(rehypePrism)
-                        .use(rehype2react, {
-                            createElement: React.createElement,
-                            components: {
-                                pre: Pre,
-                                code: Code
-                            }
-                        })
-                        .processSync(postData.content).result
-                }
-            </article>
+
+            <Content>
+                <article>
+                    <h1 className="headingXl">{postData.title}</h1>
+                    <div className="lightText">
+                        <Date dateString={postData.date} />
+                    </div>
+                    {
+                        unified()
+                            .use(markdown)
+                            .use(remark2rehype)
+                            .use(rehypePrism)
+                            .use(rehype2react, {
+                                createElement: React.createElement,
+                                components: {
+                                    pre: Pre,
+                                    code: Code
+                                }
+                            })
+                            .processSync(postData.content).result
+                    }
+                </article>
+            </Content>
         </Layout>
     )
 }
