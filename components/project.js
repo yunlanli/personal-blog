@@ -1,6 +1,41 @@
-import styled from 'styled-components'
-import Date from '../components/date'
+import styled from 'styled-components';
+import Date from '../components/date';
 import { TagList } from './tags';
+
+
+export default function Project({ info }) {
+    const {
+        name,
+        time: { start, end },
+        description,
+        thumbnail_url,
+        tech_stack,
+        github,
+        website
+    } = info;
+
+    return (
+        <Card>
+            <Thumbnail src={thumbnail_url}/>
+            <Content>
+                <Title>
+                    {name}
+                    { github ? <GitHub href={github}>
+                        <Logo src='/GitHub.png' />
+                    </GitHub> : null }
+                </Title>
+                <Time>
+                    <Date dateString={start} dateFormat='MMM yyyy'/>
+                    {' - '}
+                    { !end ? 'Present' : <Date dateString={end} dateFormat='MMM yyyy'/>}
+                </Time>
+                <TagList list={tech_stack} />
+                <Desc>{description}</Desc>
+                <Explore><a href={website}>Explore &rarr;</a></Explore>
+            </Content>
+        </Card>
+    )
+}
 
 const Card = styled.div`
     width: 20rem;
@@ -67,38 +102,3 @@ const Explore = styled.div`
         text-decoration: underline;
     }
 `
-
-
-export default function Project({ info }) {
-    const {
-        name,
-        time: { start, end },
-        description,
-        thumbnail_url,
-        tech_stack,
-        github,
-        website
-    } = info;
-
-    return (
-        <Card>
-            <Thumbnail src={thumbnail_url}/>
-            <Content>
-                <Title>
-                    {name}
-                    { github ? <GitHub href={github}>
-                        <Logo src='/GitHub.png' />
-                    </GitHub> : null }
-                </Title>
-                <Time>
-                    <Date dateString={start} dateFormat='MMM yyyy'/>
-                    {' - '}
-                    { !end ? 'Present' : <Date dateString={end} dateFormat='MMM yyyy'/>}
-                </Time>
-                <TagList list={tech_stack} />
-                <Desc>{description}</Desc>
-                <Explore><a href={website}>Explore &rarr;</a></Explore>
-            </Content>
-        </Card>
-    )
-}

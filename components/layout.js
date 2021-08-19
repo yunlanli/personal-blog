@@ -1,23 +1,17 @@
 import Head from 'next/head'
-import styled from 'styled-components'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+import useHeader from './header'
 
-const name = 'Yunlan Li'
-export const siteTitle = 'Next.js Sample Website'
 
-const Container = styled.div`
-    max-width: ${ props => props.maxWidth};
-    padding: 0 1rem;
-    margin: 3rem auto 6rem;
-`;
+export const siteTitle = 'Yunlan Li'
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
+    const Header = useHeader()
+
     return (
-        <Container maxWidth={ home ? '36rem' : '72rem' }>
+        <>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
+                <script src="https://kit.fontawesome.com/169dc53729.js" crossOrigin="anonymous" />
                 <meta
                     name="description"
                     content="Learn how to build a personal website using Next.js"
@@ -30,44 +24,11 @@ export default function Layout({ children, home }) {
                 />
                 <meta name="og:title" content={siteTitle} />
                 <meta name="twitter:card" content="summary_large_image" />
+                <title>{siteTitle}</title>
             </Head>
-            <header className={styles.header}>
-                {home ? (
-                    <>
-                        <img
-                            src="/images/profile.jpg"
-                            className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-                            alt={name}
-                        />
-                        <h1 className={utilStyles.heading2Xl}>{name}</h1>
-                    </>
-                ) : (
-                    <>
-                        <Link href="/">
-                            <a>
-                                <img
-                                    src="/images/profile.jpg"
-                                    className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                                    alt={name}
-                                />
-                            </a>
-                        </Link>
-                        <h2 className={utilStyles.headingLg}>
-                            <Link href="/">
-                                <a className={utilStyles.colorInherit}>{name}</a>
-                            </Link>
-                        </h2>
-                    </>
-                )}
-            </header>
+
+            {Header}
             <main>{children}</main>
-            {!home && (
-                <div className={styles.backToHome}>
-                    <Link href="/">
-                        <a>← Back to home</a>
-                    </Link>
-                </div>
-            )}
-        </Container>
+        </>
     )
 }

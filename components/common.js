@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 export const Code = styled.code`
     background-color: #eee;
 `
@@ -14,4 +15,14 @@ export const Pre = styled.pre`
     overflow: auto;
     padding: 24px;
     width: 100%;
+`
+
+export const Content = styled.div`
+	margin: 0 auto;
+	padding: ${
+        props => props.paddingBottom ?
+        "4rem 4rem;" :
+        "4rem 4rem 0;"
+    };
+	max-width: 74rem;
 `
