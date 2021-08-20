@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 const Icon = styled.span`
-    font-size: 2em;
+    font-size: 2rem;
     color: ${props => props.color ? props.color : 'black'};
     transition: color 0.3s;
 
