@@ -1,0 +1,15 @@
+{
+    "name": "Event @ CU",
+    "time": {
+        "start": "2021-01",
+        "end": "2021-04"
+    },
+    "description": "A Python Flask application that makes event management easy for the Columbia Morningside Heights community. Through the web UI, organizations can post event information and students can register, volunteer or crowdfund for published events.\n\nI developed this application with <a href=\"http://jasonyux.com\">Jason Yu</a> as part of the Databases class (<a href=\"https://www.coursicle.com/columbia/courses/COMS/W4111/\">W4118</a>) at Columbia and our application was among the top 3 projects of the class.",
+    "thumbnail_url": "/images/projects/cu_event.png",
+    "tech_stack": [
+		    "Python",
+		    "PostgreSQL"
+    ],
+    "github": "",
+	  "website": ""
+}

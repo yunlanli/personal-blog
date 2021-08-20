@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../lib/constants'
 
 
 export const Code = styled.code`
@@ -19,10 +20,20 @@ export const Pre = styled.pre`
 
 export const Content = styled.div`
 	margin: 0 auto;
-	padding: ${
-        props => props.paddingBottom ?
-        "4rem 4rem;" :
-        "4rem 4rem 0;"
-    };
 	max-width: 74rem;
+
+    @media (min-width: ${device.mobileMin}) {
+        padding: ${
+            props => props.paddingBottom ?
+                "2rem 2rem;" :
+            "2rem 2rem 0"
+        };
+    }
+    @media (min-width: ${device.tabletMin}) {
+        padding: ${
+            props => props.paddingBottom ?
+                "3rem 3rem;" :
+            "3rem 3rem 0"
+        };
+    }
 `

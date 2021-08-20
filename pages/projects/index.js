@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Content } from '../../components/common'
 import Layout from '../../components/layout'
 import Project from '../../components/project'
+import { device } from '../../lib/constants'
 import { getSortedProjects } from '../../lib/projects'
 
 
@@ -21,9 +22,9 @@ export default function Portofolio({ allProjectsData }) {
                 <section>
                     <ProjectContainer>
                         {allProjectsData.map(project => (
-                            <li className="listItem" key={project.name}>
+                            <ListItem key={project.name}>
                                 <Project info={project} />
-                            </li>
+                            </ListItem>
                         ))}
                     </ProjectContainer>
                 </section>
@@ -37,9 +38,29 @@ const ProjectContainer = styled.ul`
     padding: 0;
     margin: 0;
     display: flex;
-    flex-flow: row nowrap;
 
     & li {
-        margin-right: 2em;
+        margin-bottom: 4rem;
+    }
+
+    /* for screens smaller than min of latptop */
+    flex-direction: column;
+
+    @media (min-width: ${device.laptopMin}) {
+        flex-flow: row wrap;    
+        justify-content: space-around;
     }
 `;
+
+const ListItem = styled.li`
+    margin: 0 0 1.25rem;
+    /* for screens smaller than min of latptop */
+    width: 100%;
+    flex-direction: column;
+
+    @media (min-width: ${device.laptopMin}) {
+        width: 20rem;
+        flex-flow: row wrap;    
+        gap: 2rem;
+    }
+`
