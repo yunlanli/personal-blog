@@ -8,7 +8,7 @@ export function useLinks() {
 	const pages = {
 		"Projects": `${basePath}/projects`,
 		"Blog": `${basePath}/posts`,
-		"CV": `${basePath}/cv`
+		"CV": `${basePath}/files/Yunlan Li - CS Columbia.pdf`
 	}
 
   return (
@@ -39,8 +39,7 @@ export default function More() {
 }
 
 const Button = styled.button`
-	min-width: 8em;
-	padding: .5rem 0;
+	padding: .5em 1em;
 	border: 3px solid #e5e5e5;
 	color: black;
 	text-align: center;
@@ -55,7 +54,7 @@ const Button = styled.button`
   	a {
 		text-decoration: none;
 		color: inherit;
-		font-size: .9rem;
+		font-size: .75rem;
 		font-weight: 600;
 
 		&:hover { color: inherit; }
@@ -66,5 +65,5 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	gap: 2em;
+	gap: 1em 1.5em;
 `
