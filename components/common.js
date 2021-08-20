@@ -25,14 +25,14 @@ export const Content = styled.div`
     @media (min-width: ${device.mobileMin}) {
         padding: ${
             props => props.paddingBottom ?
-            "2rem 2rem;" :
+                "2rem 2rem;" :
             "2rem 2rem 0"
         };
     }
     @media (min-width: ${device.tabletMin}) {
         padding: ${
             props => props.paddingBottom ?
-            "3rem 3rem;" :
+                "3rem 3rem;" :
             "3rem 3rem 0"
         };
     }
