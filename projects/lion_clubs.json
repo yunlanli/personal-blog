@@ -1,0 +1,16 @@
+{
+    "name": "LionClubs",
+    "time": {
+        "start": "2020-10",
+        "end": ""
+    },
+    "description": "LionClubs centralizes information about student organizations at Barnard and Columbia.\n\nIn this project, I contributed to the development of the user authentication component and an admin system for managing the lifecycle of club profiles.",
+    "thumbnail_url": "/images/projects/lion_clubs.png",
+    "tech_stack": [
+		"Firebase",
+		"JavaScript",
+		"React.js"
+    ],
+	"github": "",
+	"website": "https://lionclubs.info"
+}

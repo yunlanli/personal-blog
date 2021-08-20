@@ -1,0 +1,16 @@
+{
+    "name": "JupyterLab Integration for NIST Testbed",
+    "time": {
+        "start": "2021-01",
+        "end": "2021-06"
+    },
+    "description": "A solution (<a href=\"/files/JupyterLab_Integration_for_NIST_Testbed.pdf\">paper</a>) using JupyterHub to allow users to run Jupyter Notebooks on experiment data and audio files on the remote server directly from their web browser.\n\nThis work has been integrated into the <a href=\"https://irtlab.gitlab.io/mcv-testbed/\">MCV testbed</a> and the customized <a href=\"https://pypi.org/project/nistauthenticator/\">NISTAuthenticator</a> is also available for download via pip.",
+    "thumbnail_url": "/images/projects/jupyterhub.png",
+    "tech_stack": [
+		"Python",
+		"Docker",
+		"JupyterHub"
+    ],
+    "github": "https://gitlab.com/yunlanli/jupyterhub",
+	"website": "/files/JupyterLab_Integration_for_NIST_Testbed.pdf"
+}

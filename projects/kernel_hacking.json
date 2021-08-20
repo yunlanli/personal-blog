@@ -1,0 +1,15 @@
+{
+    "name": "Linux Kernel Hacking",
+    "time": {
+        "start": "2021-01",
+        "end": "2021-04"
+    },
+    "description": "In a team of 3, implemented a weighted round robin scheduler, an in-memory filesystem and miscellaneous system calls for exposing a process's page tables to user space, tracing state changes of processes, and listing process trees, all in the Linux v5.4 kernel for the x86 architecture.",
+    "thumbnail_url": "/images/projects/linux_kernel.jpg",
+    "tech_stack": [
+		"C",
+		"Linux"
+    ],
+    "github": "https://github.com/yunlanli/W4118",
+	"website": ""
+}
