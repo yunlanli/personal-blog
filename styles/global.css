@@ -3,8 +3,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: Inconsolata, monospace, Nunito, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    font-size: 18px;
+    min-width: 280px;
 }
 
 * {
@@ -44,7 +43,7 @@ h5 {
 p {
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 1.5;
     margin-bottom: 1.5rem
 }
 
@@ -68,7 +67,8 @@ h2 a,
 h3 a,
 h4 a,
 h5 a,
-h6 a {
+h6 a,
+p a {
     color:#222;
     -webkit-text-decoration-color:#222;
     text-decoration-color:#222;
@@ -84,7 +84,8 @@ h2 a:hover,
 h3 a:hover,
 h4 a:hover,
 h5 a:hover,
-h6 a:hover {
+h6 a:hover,
+p a:hover {
     color:#757575;
     -webkit-text-decoration-color:#757575;
     text-decoration-color:#757575
