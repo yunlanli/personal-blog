@@ -9,20 +9,20 @@ import remark2rehype from 'remark-rehype'
 import { Code, Content, Pre } from '../../components/common'
 import Date from '../../components/date'
 import Layout from '../../components/layout'
-import { getAllPostIds, getPostData } from '../../lib/posts'
+import { dbxGetAllPostIds, dbxGetPostData } from '../../lib/posts'
 import rehypePrism from '../../lib/rehypePrism'
 
 
-export function getStaticPaths() {
-  const paths = getAllPostIds();
+export async function getStaticPaths() {
+  const paths = await dbxGetAllPostIds();
   return {
     paths,
     fallback: false
   }
 }
 
-export function getStaticProps({ params }) {
-  const postData = getPostData(params.id);
+export async function getStaticProps({ params }) {
+  const postData = await dbxGetPostData(params.id);
   return {
     props: {
       postData

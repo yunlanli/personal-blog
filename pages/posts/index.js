@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { getSortedPostsData } from '../../lib/posts'
+import { dbxGetSortedPostsData } from '../../lib/posts'
 import { Content } from '../../components/common'
 import Layout from '../../components/layout'
 import Date from '../../components/date'
 
 
 export async function getStaticProps() {
-    const allPostsData = getSortedPostsData()
+    const allPostsData = await dbxGetSortedPostsData()
     return {
         props: {
             allPostsData
