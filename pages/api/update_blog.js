@@ -24,10 +24,7 @@ export default async function handler(req, res) {
       return res.status(401).json({ message: 'missing query param challenge' })
     }
   } else if (req.method === 'POST') {
-    // revalidate `/posts` on demand
     try {
-      console.log(`Received Dropbox's webhook, with data: \n${JSON.stringify(req.body)}`)
-
       let lastCursor = getCursor()
       console.log(`last cursor: ${lastCursor}`)
 
@@ -39,16 +36,33 @@ export default async function handler(req, res) {
       let delta = await list_folder_continue_v1(params)
 
       setCursor(delta.cursor)
-      console.log(`webhook delta: \n${delta.entries}`)
+      console.log(`webhook delta: \n${JSON.stringify(delta)}`)
 
+
+      // revalidate `/posts` on demand
       await res.unstable_revalidate('/posts')
-      console.log('Revalidated /posts...OK')
+      console.log('OK - revalidated /posts')
 
-      // TODO: revalidate individual blog post
+      // revalidate individual blog post
+      for (let item of delta.entries) {
+        let postUrl = `/posts/${item.name}`
+        let tag = item['.tag']
+
+        if (tag === 'deleted') {
+          // TODO: delete/invalidate url
+          console.log(`Todo - revalidate ${postUrl}`)
+        } else if (tag === 'file') {
+          await res.unstable_revalidate(postUrl)
+          console.log(`OK - revalidated ${postUrl}`)
+        } else {
+          console.log(`Unknown tag ${tag} - revalidate ${postUrl}`)
+        }
+      }
 
       return res.json({ revalidated: true })
     } catch (err) {
       console.log('Revalidated /posts...FAIL')
+      console.error(err)
       return res.status(500).send('Error revalidating')
     }
   } else {

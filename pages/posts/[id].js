@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   const paths = await dbxGetAllPostIds();
   return {
     paths,
-    fallback: false
+    fallback: 'blocking'
   }
 }
 
