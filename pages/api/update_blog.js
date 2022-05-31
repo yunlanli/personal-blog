@@ -1,3 +1,7 @@
+import { getCursor, setCursor } from '../../lib/state.js'
+import { getToken, list_folder_continue_v1 } from '../../lib/dropbox.js'
+
+
 export default async function handler(req, res) {
   console.log(`${req.method} -> ${req.url}`)
   console.log(req.query)
@@ -23,6 +27,19 @@ export default async function handler(req, res) {
     // revalidate `/posts` on demand
     try {
       console.log(`Received Dropbox's webhook, with data: \n${JSON.stringify(req.body)}`)
+
+      let lastCursor = getCursor()
+      console.log(`last cursor: ${lastCursor}`)
+
+      let accessToken = await getToken()
+      let params = {
+        accessToken,
+        req: { cursor: lastCursor }
+      }
+      let delta = await list_folder_continue_v1(params)
+
+      setCursor(delta.cursor)
+      console.log(`webhook delta: \n${delta.entries}`)
 
       await res.unstable_revalidate('/posts')
       console.log('Revalidated /posts...OK')
