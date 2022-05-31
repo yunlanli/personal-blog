@@ -49,8 +49,8 @@ export default async function handler(req, res) {
         let tag = item['.tag']
 
         if (tag === 'deleted') {
-          // TODO: delete/invalidate url
-          console.log(`Todo - revalidate ${postUrl}`)
+          await res.unstable_revalidate(postUrl)
+          console.log(`OK - revalidate ${postUrl}`)
         } else if (tag === 'file') {
           await res.unstable_revalidate(postUrl)
           console.log(`OK - revalidated ${postUrl}`)

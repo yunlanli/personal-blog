@@ -23,10 +23,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = await dbxGetPostData(params.id);
-  return {
-    props: {
-      postData
-    }
+
+  if (postData) {
+    return { props: { postData } }
+  } else {
+    return { notFound: true }
   }
 }
 
