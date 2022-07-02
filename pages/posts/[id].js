@@ -1,61 +1,93 @@
+import React from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
+import { unified } from 'unified'
+import rehypeParse from 'rehype-parse'
 import rehype2react from 'rehype-react'
 import markdown from 'remark-parse'
 import remark2rehype from 'remark-rehype'
-import unified from 'unified'
-import { Code, Content, Pre } from '../../components/common'
+
+import { Code, Content, Link, Pre } from '../../components/common'
 import Date from '../../components/date'
 import Layout from '../../components/layout'
-import { getAllPostIds, getPostData } from '../../lib/posts'
+import { dbxGetAllPostIds, dbxGetPostData } from '../../lib/posts'
 import rehypePrism from '../../lib/rehypePrism'
 
 
 export async function getStaticPaths() {
-    const paths = getAllPostIds();
-    return {
-        paths,
-        fallback:false
-    }
+  const paths = await dbxGetAllPostIds();
+  return {
+    paths,
+    fallback: 'blocking'
+  }
 }
 
 export async function getStaticProps({ params }) {
-    const postData = await getPostData(params.id);
-    return {
-        props: {
-            postData
+  const postData = await dbxGetPostData(params.id);
+
+  if (postData) {
+    return { props: { postData } }
+  } else {
+    return { notFound: true }
+  }
+}
+
+export function toReact(content, ext) {
+  if (ext == 'md') {
+    return unified()
+      .use(markdown)
+      .use(remark2rehype)
+      .use(rehypePrism)
+      .use(rehype2react, {
+        createElement: React.createElement,
+        components: {
+          pre: Pre,
+          code: Code
         }
-    }
+      })
+      .processSync(content).result
+  } else if (ext === 'html') {
+    return unified()
+      .use(rehypeParse)
+      .use(rehype2react, {
+        createElement: React.createElement,
+        components: {
+          a: Link,
+          pre: Pre,
+          code: Code
+        }
+      })
+      .processSync(content).result
+  }
+}
+
+function TexMagic() {
+  // renders Latex
+  return (
+    <>
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" />
+    </>
+  )
 }
 
 export default function Post({ postData }) {
-    return (
-        <Layout>
-            <Head>
-                <title>{postData.title}</title>
-            </Head>
+  return (
+    <Layout>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
 
-            <Content>
-                <article>
-                    <h1 className="headingXl">{postData.title}</h1>
-                    <div className="lightText">
-                        <Date dateString={postData.date} />
-                    </div>
-                    {
-                        unified()
-                            .use(markdown)
-                            .use(remark2rehype)
-                            .use(rehypePrism)
-                            .use(rehype2react, {
-                                createElement: React.createElement,
-                                components: {
-                                    pre: Pre,
-                                    code: Code
-                                }
-                            })
-                            .processSync(postData.content).result
-                    }
-                </article>
-            </Content>
-        </Layout>
-    )
+      <TexMagic />
+
+      <Content>
+        <article>
+          <h1 className="headingXl">{postData.title}</h1>
+          <div className="lightText">
+            <Date dateString={postData.date} />
+          </div>
+          { toReact(postData.content, postData.ext) }
+        </article>
+      </Content>
+    </Layout>
+  )
 }

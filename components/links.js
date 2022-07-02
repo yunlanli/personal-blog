@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import { Content } from './common'
+import { Content, Link } from './common'
 
 
 export function useLinks() {
@@ -15,10 +15,7 @@ export function useLinks() {
       <Container>
 	  	{
 			Object.entries(pages).map(([text, href]) => (
-				`${basePath}/${asPath}` != href &&
-				<Button key={href}>
-					<a href={href}>{text}</a>
-				</Button>
+				(`${basePath}/${asPath}` != href) && <Link href={href}>{text}</Link>
 			))
 		}
       </Container>
@@ -38,32 +35,12 @@ export default function More() {
 	)
 }
 
-const Button = styled.button`
-	padding: .5em 1em;
-	border: 3px solid #e5e5e5;
-	color: black;
-	text-align: center;
-	background-color: white;
-	transition: background-color 0.3s, color 0.3s;
-
-	&:hover {
-		color: white;
-		background-color: #e5e5e5;
-	}
-
-  	a {
-		text-decoration: none;
-		color: inherit;
-		font-size: .75rem;
-		font-weight: 600;
-
-		&:hover { color: inherit; }
-  	}
-`;
-
 const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 1em 1.5em;
+	font-size: 1.1em;
+	font-weight: 700;
+	line-height: 1.5em;
 `

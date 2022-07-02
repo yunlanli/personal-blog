@@ -1,9 +1,26 @@
 import styled from 'styled-components'
 import { device } from '../lib/constants'
 
+const nord = {
+    blue: '#94bfce',
+    indigo: '#98bcbb'
+}
 
 export const Code = styled.code`
     background-color: #eee;
+`
+
+export const Link = styled.a`
+    color: inherit;
+    border-bottom: 3px solid ${nord.blue};
+    text-decoration: none;
+
+    &:hover {
+        background-color: ${nord.blue};
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
 `
 
 export const Pre = styled.pre`
@@ -19,6 +36,7 @@ export const Pre = styled.pre`
 `
 
 export const Content = styled.div`
+    line-height: ${props => props.lineHeight || '1em'};
 	margin: 0 auto;
 	max-width: 74rem;
 

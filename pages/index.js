@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Content } from '../components/common'
+import { Content, Link } from '../components/common'
 import { useWindowSize } from '../components/hooks'
 import { Email, GitHub, LinkedIn } from '../components/icons'
 import Layout from '../components/layout'
@@ -10,11 +10,11 @@ import { device } from '../lib/constants'
 const About = ({ windowSize }) => {
     const info = (
         <>
-            Rising junior studying CS at <a href="https://www.columbia.edu">Columbia</a>,
-            <> </>engineering manager at <a href="https://www.columbiaspectator.com">Columbia Daily Spectator</a>.
-            <> </>Previously, data engineering intern at <a href="https://www.patsnap.com">PatSnap</a>
-            <> </>and research assistant at <a href="https://www.cs.columbia.edu/irt/">IRT lab</a> at Columbia.
-            <> </><a href="https://www.atlanticcollege.org">UWC AC</a> alumni, foodie and tennis enthusiast.
+            Rising senior studying CS at <Link href="https://www.columbia.edu">Columbia</Link>,
+            <> </>engineering manager at <Link href="https://www.columbiaspectator.com">Columbia Daily Spectator</Link>.
+            <> </>Previously, data engineering intern at <Link href="https://www.patsnap.com">PatSnap</Link>
+            <> </>and research assistant at <Link href="https://www.cs.columbia.edu/irt/">IRT lab</Link> at Columbia.
+            <> </><Link href="https://www.atlanticcollege.org">UWC AC</Link> alumni, foodie and tennis enthusiast.
         </>
     )
     const windowWidth = windowSize.width
@@ -45,7 +45,7 @@ export default function Home() {
 
     return (
         <Layout>
-            <Content>
+            <Content lineHeight="1.75em">
                 <About windowSize={windowSize}/>
                 <Contact />
             </Content>

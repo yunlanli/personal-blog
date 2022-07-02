@@ -1,5 +1,5 @@
 {
-  "name": "learn-starter",
+  "name": "yunlanli-personal-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,21 +8,25 @@
     "start": "next start"
   },
   "dependencies": {
-    "date-fns": "^2.16.1",
-    "gray-matter": "^4.0.2",
-    "next": "^10.0.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "refractor": "^3.3.0",
-    "rehype-react": "^6.2.0",
-    "rehype-stringify": "^8.0.0",
-    "remark-parse": "^9.0.0",
-    "remark-rehype": "^8.0.0",
-    "styled-components": "^5.2.1",
-    "unified": "^9.2.0",
-    "unist-util-visit": "^2.0.3"
+    "axios": "^0.27.2",
+    "date-fns": "^2.28.0",
+    "gray-matter": "^4.0.3",
+    "next": "^12.1.6",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "refractor": "^4.7.0",
+    "rehype": "^12.0.1",
+    "rehype-parse": "^8.0.4",
+    "rehype-react": "^7.1.1",
+    "rehype-stringify": "^9.0.3",
+    "remark": "^14.0.2",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "styled-components": "^5.3.5",
+    "unified": "^10.1.2",
+    "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.8.0"
+    "babel-plugin-styled-components": "^2.0.7"
   }
 }
