@@ -6,7 +6,7 @@ import rehypeParse from 'rehype-parse'
 import rehype2react from 'rehype-react'
 import markdown from 'remark-parse'
 import remark2rehype from 'remark-rehype'
-import { Code, Content, Pre } from '../../components/common'
+import { Code, Content, Link, Pre } from '../../components/common'
 import Date from '../../components/date'
 import Layout from '../../components/layout'
 import { dbxGetAllPostIds, dbxGetPostData } from '../../lib/posts'
@@ -51,6 +51,7 @@ export function toReact(content, ext) {
       .use(rehype2react, {
         createElement: React.createElement,
         components: {
+          a: Link,
           pre: Pre,
           code: Code
         }
