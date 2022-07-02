@@ -1,11 +1,12 @@
 import React from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
-import {unified} from 'unified'
+import { unified } from 'unified'
 import rehypeParse from 'rehype-parse'
 import rehype2react from 'rehype-react'
 import markdown from 'remark-parse'
 import remark2rehype from 'remark-rehype'
+
 import { Code, Content, Link, Pre } from '../../components/common'
 import Date from '../../components/date'
 import Layout from '../../components/layout'
