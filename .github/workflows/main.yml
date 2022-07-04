@@ -25,7 +25,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: yunlanli/personal-blog:${{ github.sha }}
+          tags: |
+            ghcr.io/yunlanli/personal-blog:latest
+            ghcr.io/yunlanli/personal-blog:${{ github.sha }}
           secrets: |
             dbx_app_key=${{ secrets.DROPBOX_APP_KEY }}
             dbx_app_secret=${{ secrets.DROPBOX_APP_SECRET }}
