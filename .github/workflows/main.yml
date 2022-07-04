@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  # Allows you to run this workflow manually from the Actions tab
+  push:
   workflow_dispatch:
 
 jobs:
@@ -9,15 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
+        
+      - name: login to github container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: build and push docker image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: yunlanli/personal-blog:${{ github.sha }}
+          secrets: |
+            dbx_app_key=${{ secrets.DROPBOX_APP_KEY }}
+            dbx_app_secret=${{ secrets.DROPBOX_APP_SECRET }}
+            dbx_access_token=${{ secrets.DROPBOX_ACCESS_TOKEN }}
+            dbx_refresh_token=${{ secrets.DROPBOX_REFRESH_TOKEN }}
+            dbx_authorization_code=${{ secrets.DROPBOX_AUTHORIZATION_CODE }}
+            personal_blog_secret=${{ secrets.MY_BLOG_SECRET_TOKEN }}
