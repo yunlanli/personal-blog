@@ -45,5 +45,7 @@ jobs:
           username: ${{ secrets.PS_SERVER_USERNAME }}
           key: ${{ secrets.PS_SERVER_KEY }}
           script: |
-            whoami
             cd ~/personal-projects/personal-blog
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u USERNAME --password-stdin
+            docker pull ghcr.io/yunlanli/personal-blog:latest
+            docker-compose up -d
