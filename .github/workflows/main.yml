@@ -35,3 +35,15 @@ jobs:
             dbx_refresh_token=${{ secrets.DROPBOX_REFRESH_TOKEN }}
             dbx_authorization_code=${{ secrets.DROPBOX_AUTHORIZATION_CODE }}
             personal_blog_secret=${{ secrets.MY_BLOG_SECRET_TOKEN }}
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.PS_SERVER_HOST }}
+          username: ${{ secrets.PS_SERVER_USERNAME }}
+          key: ${{ secrets.PS_SERVER_KEY }}
+          script: |
+            whoami
+            cd ~/personal-projects/personal-blog
