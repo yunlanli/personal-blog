@@ -2,15 +2,7 @@ version: "3.9"
 
 services:
   personal-website:
-    build:
-      context: .
-      secrets:
-        - dbx_authorization_code
-        - dbx_app_key
-        - dbx_app_secret
-        - dbx_access_token
-        - dbx_refresh_token
-        - personal_blog_secret
+    image: "ghcr.io/yunlanli/personal-blog:latest"
     ports:
       - "5000:8000"
     secrets:

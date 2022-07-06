@@ -15,7 +15,7 @@ RUN --mount=type=secret,id=dbx_app_key,uid=10001,gid=101,mode=0440 \
     --mount=type=secret,id=dbx_refresh_token,uid=10001,gid=101,mode=0440 \
     --mount=type=secret,id=dbx_authorization_code,uid=10001,gid=101,mode=0440 \
     --mount=type=secret,id=personal_blog_secret,uid=10001,gid=101,mode=0440 \
-    ./scripts/build.sh
+    . ./scripts/setenv.sh && npm run build
 
-ENTRYPOINT ["./scripts/run.sh"]
+ENTRYPOINT ["scripts/run.sh", "scripts/setenv.sh"]
 CMD ["--port=8000"]
