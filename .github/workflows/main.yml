@@ -1,0 +1,70 @@
+name: build and deploy personal website
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '!test/**'
+      - '!**.md'
+      - '!.gitignore'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        
+      - name: login to github container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build personal-blog docker image and push to ghcr
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: |
+            ghcr.io/yunlanli/personal-blog:latest
+            ghcr.io/yunlanli/personal-blog:${{ github.sha }}
+          target: personal-website
+          secrets: |
+            dbx_app_key=${{ secrets.DROPBOX_APP_KEY }}
+            dbx_app_secret=${{ secrets.DROPBOX_APP_SECRET }}
+            dbx_access_token=${{ secrets.DROPBOX_ACCESS_TOKEN }}
+            dbx_refresh_token=${{ secrets.DROPBOX_REFRESH_TOKEN }}
+            dbx_authorization_code=${{ secrets.DROPBOX_AUTHORIZATION_CODE }}
+            personal_blog_secret=${{ secrets.MY_BLOG_SECRET_TOKEN }}
+  
+  deploy-to-droplet:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.PS_SERVER_HOST }}
+          username: ${{ secrets.PS_SERVER_USERNAME }}
+          key: ${{ secrets.PS_SERVER_KEY }}
+          script: |
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull ghcr.io/yunlanli/personal-blog:latest
+
+            mkdir -p ~/docker-compose/.secrets
+            cd ~/docker-compose
+
+            echo ${{ secrets.DROPBOX_APP_KEY }} > .secrets/dbx_app_key
+            echo ${{ secrets.DROPBOX_APP_SECRET }} > .secrets/dbx_app_secret
+            echo ${{ secrets.DROPBOX_ACCESS_TOKEN }} > .secrets/dbx_access_token
+            echo ${{ secrets.DROPBOX_REFRESH_TOKEN }} > .secrets/dbx_refresh_token
+            echo ${{ secrets.DROPBOX_AUTHORIZATION_CODE }} > .secrets/dbx_authorization_code
+            echo ${{ secrets.MY_BLOG_SECRET_TOKEN }} > .secrets/personal_blog_secret
+
+            wget -O docker-compose.yml \
+            https://raw.githubusercontent.com/yunlanli/personal-blog/${{ github.ref }}/docker-compose.yml
+
+            docker-compose up -d
