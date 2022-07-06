@@ -6,7 +6,9 @@ image_name="$docker_registry/yunlanli/personal-blog"
 tag="$image_name:$commit_hash"
 latest="$image_name:latest"
 
-docker build -t $tag -t $latest . \
+docker build \
+    --target personal-website \
+    -t $tag -t $latest . \
     --secret id=dbx_app_key,src=.secrets/dbx_app_key \
     --secret id=dbx_app_secret,src=.secrets/dbx_app_secret \
     --secret id=dbx_access_token,src=.secrets/dbx_access_token \
