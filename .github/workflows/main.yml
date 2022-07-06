@@ -1,7 +1,13 @@
-name: CI
+name: build and deploy personal website
 
 on:
   push:
+    branches:
+      - main
+    paths:
+      - '!test/**'
+      - '!**.md'
+      - '!.gitignore'
   workflow_dispatch:
 
 jobs:
@@ -10,9 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Run a one-line script
-        run: echo Hello, world!
         
       - name: login to github container registry
         uses: docker/login-action@v2
@@ -21,7 +24,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: build and push docker image
+      - name: build personal-blog docker image and push to ghcr
         uses: docker/build-push-action@v3
         with:
           push: true
@@ -35,8 +38,10 @@ jobs:
             dbx_refresh_token=${{ secrets.DROPBOX_REFRESH_TOKEN }}
             dbx_authorization_code=${{ secrets.DROPBOX_AUTHORIZATION_CODE }}
             personal_blog_secret=${{ secrets.MY_BLOG_SECRET_TOKEN }}
-  deploy:
+  
+  deploy-to-droplet:
     runs-on: ubuntu-latest
+    needs: build
     
     steps:
       - uses: appleboy/ssh-action@v0.1.4
@@ -46,6 +51,6 @@ jobs:
           key: ${{ secrets.PS_SERVER_KEY }}
           script: |
             cd ~/personal-projects/personal-blog
-            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u USERNAME --password-stdin
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ghcr.io/yunlanli/personal-blog:latest
             docker-compose up -d
