@@ -31,6 +31,7 @@ jobs:
           tags: |
             ghcr.io/yunlanli/personal-blog:latest
             ghcr.io/yunlanli/personal-blog:${{ github.sha }}
+          target: personal-website
           secrets: |
             dbx_app_key=${{ secrets.DROPBOX_APP_KEY }}
             dbx_app_secret=${{ secrets.DROPBOX_APP_SECRET }}
@@ -50,7 +51,20 @@ jobs:
           username: ${{ secrets.PS_SERVER_USERNAME }}
           key: ${{ secrets.PS_SERVER_KEY }}
           script: |
-            cd ~/personal-projects/personal-blog
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ghcr.io/yunlanli/personal-blog:latest
+
+            mkdir -p ~/docker-compose/.secrets
+            cd ~/docker-compose
+
+            echo ${{ secrets.DROPBOX_APP_KEY }} > .secrets/dbx_app_key
+            echo ${{ secrets.DROPBOX_APP_SECRET }} > .secrets/dbx_app_secret
+            echo ${{ secrets.DROPBOX_ACCESS_TOKEN }} > .secrets/dbx_access_token
+            echo ${{ secrets.DROPBOX_REFRESH_TOKEN }} > .secrets/dbx_refresh_token
+            echo ${{ secrets.DROPBOX_AUTHORIZATION_CODE }} > .secrets/dbx_authorization_code
+            echo ${{ secrets.MY_BLOG_SECRET_TOKEN }} > .secrets/personal_blog_secret
+
+            wget -O docker-compose.yml \
+            https://raw.githubusercontent.com/yunlanli/personal-blog/${{ github.ref }}/docker-compose.yml
+
             docker-compose up -d
