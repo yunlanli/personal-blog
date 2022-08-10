@@ -1,0 +1,17 @@
+{
+    "name": "The Shaft",
+    "time": {
+        "start": "2021-08",
+        "end": "2022-05"
+    },
+    "description": "<a href=\"https://theshaft.info/\">theShaft.info</a> makes the housing selection process for Columbia Undergraduate students.\n\nIn this project, I contributed to the development of the <a href=\"https://theshaft.info/lottery\">lottery predictor page</a>.",
+    "thumbnail_url": "/images/projects/shaft.png",
+    "tech_stack": [
+		"Node.js",
+		"React.js",
+        "MySQL"
+
+    ],
+	"github": "",
+	"website": "https://theshaft.info/"
+}

@@ -11,10 +11,12 @@ const About = ({ windowSize }) => {
     const info = (
         <>
             Rising senior studying CS at <Link href="https://www.columbia.edu">Columbia</Link>,
-            <> </>engineering manager at <Link href="https://www.columbiaspectator.com">Columbia Daily Spectator</Link>.
-            <> </>Previously, data engineering intern at <Link href="https://www.patsnap.com">PatSnap</Link>
+            <> </>interested in full-stack development and distributed systems.<br/><br/>
+
+            Previously, systems engineer intern at <Link href="https://www.servicenow.com/">ServiceNow</Link>,
+            <> </>engineering manager at <Link href="https://www.columbiaspectator.com">Columbia Daily Spectator</Link>,
+            <> </>data engineering intern at <Link href="https://www.patsnap.com">PatSnap</Link>
             <> </>and research assistant at <Link href="https://www.cs.columbia.edu/irt/">IRT lab</Link> at Columbia.
-            <> </><Link href="https://www.atlanticcollege.org">UWC AC</Link> alumni, foodie and tennis enthusiast.
         </>
     )
     const windowWidth = windowSize.width

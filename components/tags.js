@@ -12,6 +12,7 @@ const TAG2COLOR = {
     'MySQL': '#61DBFB',
     'Nginx': '#28a528',
     'Node.js': '#28a528',
+    'OCaml': '#e39135',
     'PostgreSQL': '#61DBFB',
     'Python': '#FFD343',
     'React.js': '#61DBFB'
