@@ -1,0 +1,14 @@
+{
+    "name": "Pocaml Compiler",
+    "time": {
+        "start": "2021-09",
+        "end": "2021-12"
+    },
+    "description": "Pocaml is a a compiler written in OCaml for an OCaml-like functional programming language with polymorphic let-in bindings, lambda functions and pattern matching.",
+    "thumbnail_url": "/images/projects/pocaml.png",
+    "tech_stack": [
+		"OCaml"
+    ],
+    "github": "https://github.com/Pocaml/Pocaml",
+	"website": "https://www.dropbox.com/s/zxu0kf3ian9tlsb/pocaml_compiler.pdf?dl=0"
+}
