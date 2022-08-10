@@ -2,13 +2,14 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { Content, Link } from './common'
 
+const CvUrl = "https://www.dropbox.com/s/bg8dosvmk1ririn/Yunlan.Li.pdf?dl=0"
 
 export function useLinks() {
 	const { basePath, asPath, ...router } = useRouter()
 	const pages = {
 		"Projects": `${basePath}/projects`,
 		"Blog": `${basePath}/posts`,
-		"CV": `${basePath}/files/Yunlan Li - CS Columbia.pdf`
+		"CV": `${CvUrl}`
 	}
 
   return (
