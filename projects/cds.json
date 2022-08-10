@@ -1,0 +1,15 @@
+{
+    "name": "Columbia Daily Specator",
+    "time": {
+        "start": "2019-09",
+        "end": "2022-05"
+    },
+    "description": "<a href=\"https://www.columbiaspectator.com/\">columbiaspectator.com</a> is the homepage of Columbia Daily Spectator, the student newspaper of Columbia University.\n\nI contributed to the migration effort of rewriting the website in React and moving it to be hosted using Arc XP. I worked on various aspects of the website during the first three years of my undergrad.",
+    "thumbnail_url": "/images/projects/cds.png",
+    "tech_stack": [
+		"JavaScript",
+		"React.js"
+    ],
+	"github": "",
+	"website": "https://www.columbiaspectator.com/"
+}
