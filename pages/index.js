@@ -10,8 +10,8 @@ import { device } from '../lib/constants'
 const About = ({ windowSize }) => {
     const info = (
         <>
-            Rising senior studying CS at <Link href="https://www.columbia.edu">Columbia</Link>,
-            <> </>interested in full-stack development and distributed systems.<br/><br/>
+            Hi There!, I'm a recent graduate from <Link href="https://www.columbia.edu">Columbia</Link>.
+            <> </>My interests lie in full-stack development and distributed systems.<br/><br/>
 
             Previously, systems engineer intern at <Link href="https://www.servicenow.com/">ServiceNow</Link>,
             <> </>engineering manager at <Link href="https://www.columbiaspectator.com">Columbia Daily Spectator</Link>,
